@@ -24,3 +24,15 @@ export type DbContextType = {
   updateArticle: (article: DataType) => Promise<void>;
   articles: DataType[];
 };
+
+export type Params = {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+  image: string;
+};
+
+export type UpdatePageProps = {
+  params: Params;
+};
