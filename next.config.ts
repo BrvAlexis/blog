@@ -13,6 +13,20 @@ const nextConfig: NextConfig = {
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
+  images: {
+    remotePatterns: [
+      {
+        hostname: "lh3.googleusercontent.com",
+        protocol: "https",
+        pathname: "**",
+      },
+      {
+        hostname: "firebasestorage.googleapis.com",
+        protocol: "https",
+        pathname: "**",
+      },
+    ],
+  },
 };
 
 export default nextConfig;

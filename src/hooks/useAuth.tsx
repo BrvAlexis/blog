@@ -6,12 +6,12 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   User,
-  EmailAuthProvider,
   onAuthStateChanged,
+  signInWithEmailAndPassword,
 } from "firebase/auth";
 
 const providerGoogle = new GoogleAuthProvider();
-const providerEmail = new EmailAuthProvider();
+
 
 export const useAuth = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -29,9 +29,9 @@ export const useAuth = () => {
     }
   };
 
-  const signInWithEmail = async () => {
+  const signInWithEmail = async (email: string, password: string) => {
     try {
-      const result = await signInWithPopup(auth, providerEmail);
+      const result = await signInWithEmailAndPassword(auth, email, password);
       setUser(result.user);
       router.push("/");
     } catch (error) {
