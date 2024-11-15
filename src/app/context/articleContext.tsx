@@ -53,7 +53,7 @@ export const ArticleProvider = ({
 
   const addArticle = async (
     articleData: Omit<DataType, "id"> & { image: string }
-  ) => {
+  ): Promise<void> => {
     try {
       const docRef = await addDoc(collection(db, "articles"), {
         ...articleData,
@@ -65,7 +65,7 @@ export const ArticleProvider = ({
         authorId,
       };
       setArticles([...articles, newArticle]);
-      return newArticle;
+      return;
     } catch (error) {
       console.error("Error adding article: ", error);
       throw error;
@@ -74,10 +74,35 @@ export const ArticleProvider = ({
 
   const updateArticle = async (article: DataType) => {
     try {
-      await updateDoc(doc(db, "articles", article.id), article);
+      const articleRef = doc(db, "articles", article.id);
+      await updateDoc(articleRef, article);
+
+      setArticles(
+        articles.map((a) => (a.id === article.id ? { ...a, ...article } : a))
+      );
     } catch (error) {
       console.error("Error updating article: ", error);
       throw error;
     }
   };
+
+  const deleteArticle = async (id: string) => {
+    try {
+      await deleteDoc(doc(db, "articles", id));
+      setArticles(articles.filter((a) => a.id !== id));
+    } catch (error) {
+      console.error("Error deleting article: ", error);
+      throw error;
+    }
+  };
+  const value = {
+    articles,
+    addArticle,
+    updateArticle,
+    deleteArticle,
+    data: articles,
+  };
+  return (
+    <ArticleContext.Provider value={value}>{children}</ArticleContext.Provider>
+  );
 };

@@ -2,6 +2,7 @@ import { ThemeProvider } from "@/app/components/theme-provider";
 import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/app/components/navbar";
+import { ArticleProvider } from "@/app/context/articleContext";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -24,8 +25,10 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <Navbar />
-            {children}
+            <ArticleProvider>
+              <Navbar />
+              {children}
+            </ArticleProvider>
           </ThemeProvider>
         </body>
       </html>

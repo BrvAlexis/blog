@@ -22,4 +22,5 @@ export type DbContextType = {
   addArticle: (articleData: Omit<DataType, "id">) => Promise<void>;
   deleteArticle: (id: string) => Promise<void>;
   updateArticle: (article: DataType) => Promise<void>;
+  articles: DataType[];
 };
