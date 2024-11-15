@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { auth } from "../../firebase/configFirebase";
+import { auth } from "../firebase/configFirebase";
 import {
   signInWithPopup,
   GoogleAuthProvider,
@@ -11,7 +11,6 @@ import {
 } from "firebase/auth";
 
 const providerGoogle = new GoogleAuthProvider();
-
 
 export const useAuth = () => {
   const [user, setUser] = useState<User | null>(null);
