@@ -18,12 +18,20 @@ import Link from "next/link";
 
 export default function UpdateArticle({ params }: UpdatePageProps) {
   const [file, setFile] = useState<File | undefined>();
-  // const [imagePreview, setImagePreview] = useState<string | undefined>();
+  const [imagePreview, setImagePreview] = useState<string | undefined>();
   const { user } = useAuth();
   const router = useRouter();
   const { updateArticle, articles } = useFirebase();
   const [currentImageUrl, setCurrentImageUrl] = useState<string | undefined>();
   const articleId = params.id as string;
+
+  const articleToUpdate = articles.find((article) => article.id === articleId);
+
+  useEffect(() => {
+    if (articleToUpdate) {
+      setCurrentImageUrl(articleToUpdate.image);
+    }
+  }, [articleToUpdate]);
 
   const {
     handleSubmit,
@@ -31,6 +39,9 @@ export default function UpdateArticle({ params }: UpdatePageProps) {
     formState: { errors },
   } = useForm<DataFormType>({
     resolver: yupResolver(articleSchema),
+    defaultValues: {
+      ...articleToUpdate,
+    },
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,22 +55,26 @@ export default function UpdateArticle({ params }: UpdatePageProps) {
 
   const onSubmit: SubmitHandler<DataFormType> = async (formData) => {
     try {
-      let imageUrl = "";
+      let updatedImageUrl = currentImageUrl;
       if (file) {
         const imageRef = ref(storage, `articlesImages/${file.name}`);
         await uploadBytes(imageRef, file);
-        imageUrl = await getDownloadURL(imageRef);
+        updatedImageUrl = await getDownloadURL(imageRef);
       }
-      await addArticle({
-        ...formData,
-        image: imageUrl,
+      const updatedArticle: DataType = {
+        id: articleId,
+        title: formData.title,
+        description: formData.description,
+        image: updatedImageUrl as string,
+        category: formData.category,
         authorId: user?.uid as string,
         authorName: user?.displayName as string,
         createdAt: new Date().toISOString(),
-      });
-      setImagePreview(undefined);
+      };
+      updateArticle(updatedArticle);
       router.push("/dashboard");
     } catch (error) {
+      console.error("Error updating article:", error);
       console.log(error);
     }
   };
@@ -85,10 +100,10 @@ export default function UpdateArticle({ params }: UpdatePageProps) {
             className="cursor-pointer"
             {...register("image", { onChange: handleChange })}
           />
-          {imagePreview && (
+          {currentImageUrl && (
             <img
               className="w-full h-full object-cover"
-              src={imagePreview}
+              src={currentImageUrl}
               alt="Image Preview"
             />
           )}
@@ -105,7 +120,7 @@ export default function UpdateArticle({ params }: UpdatePageProps) {
               <Link href="/dashboard">Cancel</Link>
             </Button>
             <Button type="submit">
-              <Link href="/dashboard">Create Article</Link>
+              <Link href="/dashboard">Modifier Article</Link>
             </Button>
           </div>
         </form>

@@ -22,7 +22,7 @@ export const useAuth = () => {
     try {
       const result = await signInWithPopup(auth, providerGoogle);
       setUser(result.user);
-      router.push("/");
+      router.push("/dashboard");
     } catch (error) {
       console.error(error);
     }
@@ -32,7 +32,7 @@ export const useAuth = () => {
     try {
       const result = await signInWithEmailAndPassword(auth, email, password);
       setUser(result.user);
-      router.push("/");
+      router.push("/dashboard");
     } catch (error) {
       console.error(error);
     }
@@ -53,9 +53,9 @@ export const useAuth = () => {
 
   const redirectToSignIn = () => {
     if (user) {
-      router.push("/");
+      router.push("/dashboard");
     } else {
-      router.push("/signInAndUp");
+      router.push("/");
     }
   };
 
