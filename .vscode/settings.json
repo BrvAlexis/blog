@@ -1,4 +1,13 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
-  "cSpell.words": ["Firestore", "hookform", "lucide"]
+  "cSpell.words": [
+    "clsx",
+    "Firestore",
+    "hookform",
+    "longevite",
+    "lucide",
+    "sante",
+    "tailwindcss",
+    "turbopack"
+  ]
 }

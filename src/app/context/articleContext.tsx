@@ -1,108 +1,76 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
-
 import {
-  collection,
-  onSnapshot,
-  addDoc,
-  deleteDoc,
-  doc,
-  updateDoc,
-  query,
-  where,
-} from "firebase/firestore";
-import { db } from "@/firebase/configFirebase";
-import { useAuth } from "@/hooks/useAuth";
-import { DataType, DbContextType } from "@/types/types";
+  createContext,
+  useContext,
+  ReactNode,
+  useState,
+  useEffect,
+} from "react";
+import { collection, addDoc, Timestamp } from "firebase/firestore";
+import { firestore } from "@/firebase/configFirebase";
+import { Article } from "@/types/article";
+import { getArticlesFromFirebase } from "@/firebase/configFirebase";
 
-const ArticleContext = createContext<DbContextType | null>(null);
+interface ArticleType {
+  title: string;
+  description: string;
+  category: string;
+  image: string;
+  authorId: string;
+  authorName: string;
+  createdAt: string; // ISO string date
+}
 
-export const useFirebase = () => {
-  const context = useContext(ArticleContext);
-  if (!context) {
+interface FirebaseContextProps {
+  addArticle: (article: ArticleType) => Promise<void>;
+  articles: ArticleType[];
+  deleteArticle: (id: string) => Promise<void>;
+}
+
+const FirebaseContext = createContext<FirebaseContextProps | undefined>(
+  undefined
+);
+
+export const FirebaseProvider = ({ children }: { children: ReactNode }) => {
+  const [articles, setArticles] = useState<Article[]>([]);
+
+  useEffect(() => {
+    const fetchArticles = async () => {
+      const fetchedArticles = await getArticlesFromFirebase();
+      setArticles(fetchedArticles);
+    };
+
+    fetchArticles();
+  }, []);
+
+  const addArticle = async (article: ArticleType) => {
+    try {
+      await addDoc(collection(firestore, "articles"), {
+        ...article,
+        createdAt: Timestamp.fromDate(new Date()),
+      });
+    } catch (error: any) {
+      console.error("Erreur lors de l'ajout de l'article:", error);
+      throw new Error(error.message || "Erreur lors de l'ajout de l'article");
+    }
+  };
+
+  const deleteArticle = (id: string) => {
+    setArticles((prev) => prev.filter((article) => article.id !== id));
+  };
+
+  return (
+    <FirebaseContext.Provider value={{ addArticle, articles, deleteArticle }}>
+      {children}
+    </FirebaseContext.Provider>
+  );
+};
+
+export const useFirebase = (): FirebaseContextProps => {
+  const context = useContext(FirebaseContext);
+  if (context === undefined) {
     throw new Error("useFirebase must be used within a FirebaseProvider");
   }
   return context;
-};
-
-export const ArticleProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
-  const [articles, setArticles] = useState<DataType[]>([]);
-  const { user } = useAuth();
-  const authorId = user?.uid as string;
-
-  useEffect(() => {
-    if (!authorId) return;
-    const q = query(
-      collection(db, "articles"),
-      where("authorId", "==", authorId)
-    );
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const data: DataType[] = [];
-      snapshot.forEach((doc) => {
-        data.push({ id: doc.id, ...doc.data() } as DataType);
-      });
-      setArticles(data);
-    });
-    return () => unsubscribe();
-  }, [authorId]);
-
-  const addArticle = async (
-    articleData: Omit<DataType, "id"> & { image: string }
-  ): Promise<void> => {
-    try {
-      const docRef = await addDoc(collection(db, "articles"), {
-        ...articleData,
-        authorId,
-      });
-      const newArticle: DataType = {
-        id: docRef.id,
-        ...articleData,
-        authorId,
-      };
-      setArticles([...articles, newArticle]);
-      return;
-    } catch (error) {
-      console.error("Error adding article: ", error);
-      throw error;
-    }
-  };
-
-  const updateArticle = async (article: DataType) => {
-    try {
-      const articleRef = doc(db, "articles", article.id);
-      await updateDoc(articleRef, article);
-
-      setArticles(
-        articles.map((a) => (a.id === article.id ? { ...a, ...article } : a))
-      );
-    } catch (error) {
-      console.error("Error updating article: ", error);
-      throw error;
-    }
-  };
-
-  const deleteArticle = async (id: string) => {
-    try {
-      await deleteDoc(doc(db, "articles", id));
-      setArticles(articles.filter((a) => a.id !== id));
-    } catch (error) {
-      console.error("Error deleting article: ", error);
-      throw error;
-    }
-  };
-  const value = {
-    articles,
-    addArticle,
-    updateArticle,
-    deleteArticle,
-    data: articles,
-  };
-  return (
-    <ArticleContext.Provider value={value}>{children}</ArticleContext.Provider>
-  );
 };

@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Plus, Settings, LogOut } from "lucide-react";
 import { signOut } from "firebase/auth";
-import { auth } from "../../firebase/configFirebase";
+// import { auth } from "../../firebase/configFirebase";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 

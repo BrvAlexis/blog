@@ -1,8 +1,7 @@
-import * as Yup from "yup";
+import * as yup from "yup";
 
-export const articleSchema = Yup.object().shape({
-  title: Yup.string().trim().required("Titre est requis"),
-  description: Yup.string().trim().required("Description est requise"),
-  category: Yup.string().trim().required("Catégorie est requise"),
-  image: Yup.string().trim().url("L'image doit être une URL valide"),
+export const articleSchema = yup.object({
+  title: yup.string().required("Le titre est requis"),
+  description: yup.string().required("La description est requise"),
+  category: yup.string().required("La catégorie est requise"),
 });

@@ -39,8 +39,8 @@ export default function PageArticle({ params }: UpdatePageProps) {
         </Link>
       </div>
       <Image
-        src={article.image}
-        alt={article.title}
+        src={article.image || ""}
+        alt={article.title || ""}
         width={1000}
         height={1000}
       />

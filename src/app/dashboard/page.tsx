@@ -33,8 +33,8 @@ export default function Dashboard() {
               {user?.photoURL && (
                 <li>
                   <Image
-                    src={user?.photoURL}
-                    alt={`Photo de profil de ${user?.email}`}
+                    src={user.photoURL}
+                    alt={`Photo de profil de ${user.email}`}
                     width={100}
                     height={100}
                     className="rounded-full"
@@ -63,39 +63,45 @@ export default function Dashboard() {
       </Card>
       <div className="flex flex-col space-y-4 mt-4 p-3">
         <h1 className="text-2xl font-bold">Articles</h1>
-        <p className="text-muted-foreground">Vos post publiées</p>
+        <p className="text-muted-foreground">Vos posts publiés</p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {articles.map((item, index) => (
-            <Card key={index} className="p-3">
-              <div className="flex flex-col gap-2">
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  width={100}
-                  height={100}
-                  className="w-full h-full object-cover"
-                />
+          {articles && articles.length > 0 ? (
+            articles.map((item, index) => (
+              <Card key={index} className="p-3">
                 <div className="flex flex-col gap-2">
-                  <h2 className="text-lg font-bold">{item.title}</h2>
-                  <p className="text-sm text-muted-foreground">
-                    {item.category}
-                  </p>
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    width={100}
+                    height={100}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="flex flex-col gap-2">
+                    <h2 className="text-lg font-bold">{item.title}</h2>
+                    <p className="text-sm text-muted-foreground">
+                      {item.category}
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <div className="flex items-center justify-between">
-                <Link href={`/dashboard/articleUser/${item.id}`}>
-                  <Edit />
-                </Link>
-                <Button
-                  className="hover:bg-red-500 hover:text-white"
-                  variant="destructive"
-                  onClick={() => deleteArticle(item.id)}
-                >
-                  <Trash />
-                </Button>
-              </div>
-            </Card>
-          ))}
+                <div className="flex items-center justify-between">
+                  <Link href={`/dashboard/articleUser/${item.id}`}>
+                    <Edit />
+                  </Link>
+                  <Button
+                    className="hover:bg-red-500 hover:text-white"
+                    variant="destructive"
+                    onClick={() => deleteArticle(item.id)}
+                  >
+                    <Trash />
+                  </Button>
+                </div>
+              </Card>
+            ))
+          ) : (
+            <p className="text-center text-muted-foreground">
+              Aucun article trouvé.
+            </p>
+          )}
         </div>
       </div>
     </>
