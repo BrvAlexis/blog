@@ -18,10 +18,17 @@ export const storage = getStorage(app);
 export const firestore = getFirestore(app);
 
 export const getArticlesFromFirebase = async () => {
-  const articlesCollection = collection(firestore, "articles");
-  const articlesSnapshot = await getDocs(articlesCollection);
-  return articlesSnapshot.docs.map((doc) => ({
-    id: doc.id,
-    ...doc.data(),
-  }));
+  try {
+    const articlesCollection = collection(firestore, "articles");
+    const articlesSnapshot = await getDocs(articlesCollection);
+    const articles = articlesSnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    console.log("Articles récupérés :", articles);
+    return articles;
+  } catch (error) {
+    console.error("Erreur lors de la récupération des articles :", error);
+    return [];
+  }
 };
