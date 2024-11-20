@@ -6,6 +6,7 @@ import { DataType } from "@/types/types";
 import Image from "next/image";
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Hero } from "@/components/hero";
 
 export default function Home() {
   const [articles, setArticles] = useState<DataType[]>([]);
@@ -25,9 +26,7 @@ export default function Home() {
     <>
       <main>
         <section className="hero">
-          <h1 className="text-4xl font-bold flex justify-center items-center h-screen">
-            Hero
-          </h1>
+          <Hero />
         </section>
         <section className="articles">
           <h1 className="text-2xl font-bold flex justify-center items-center h-screen">
