@@ -11,6 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { GoogleAuthProvider } from "firebase/auth";
+import { useState } from "react";
 
 const providerGoogle = new GoogleAuthProvider();
 providerGoogle.addScope("profile");
@@ -18,6 +19,7 @@ providerGoogle.addScope("email");
 
 export default function Navbar() {
   const { user, loading, signOut, LoadingSkeleton } = useAuth();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   if (loading) {
     return (
@@ -28,32 +30,34 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="navbar flex justify-between items-center p-4 bg-white dark:bg-gray-800">
+    <nav className="navbar flex justify-between items-center p-4 bg-white dark:bg-gray-800 shadow-md">
       <div className="navbar-left flex items-center space-x-4">
         <Link href="/">
-          <span className="text-xl font-bold text-gray-800 dark:text-white">
+          <span className="text-xl font-semibold text-gray-800 dark:text-white hover:text-indigo-500 transition-colors duration-200">
             HealthBlog
           </span>
         </Link>
-        <Link href="/articles">
-          <span className="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white">
-            Articles
-          </span>
-        </Link>
-        <Link href="/about">
-          <span className="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white">
-            À propos
-          </span>
-        </Link>
-        <Link href="/contact">
-          <span className="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white">
-            Contact
-          </span>
-        </Link>
+        <div className="hidden md:flex space-x-4">
+          <Link href="/articles">
+            <span className="text-gray-600 dark:text-gray-300 hover:text-indigo-500 transition-colors duration-200">
+              Articles
+            </span>
+          </Link>
+          <Link href="/about">
+            <span className="text-gray-600 dark:text-gray-300 hover:text-indigo-500 transition-colors duration-200">
+              À propos
+            </span>
+          </Link>
+          <Link href="/contact">
+            <span className="text-gray-600 dark:text-gray-300 hover:text-indigo-500 transition-colors duration-200">
+              Contact
+            </span>
+          </Link>
+        </div>
       </div>
       <div className="navbar-right flex items-center space-x-4">
         <ModeToggle />
-        {user && (
+        {user ? (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Avatar className="cursor-pointer">
@@ -82,19 +86,71 @@ export default function Navbar() {
               <DropdownMenuItem>
                 <Link href="/dashboard">Tableau de bord</Link>
               </DropdownMenuItem>
-
               <DropdownMenuItem onClick={signOut}>Déconnexion</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-        )}
-        {!user && (
+        ) : (
           <Link href="/signInAndUp">
-            <span className="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white">
+            <span className="text-gray-600 dark:text-gray-300 hover:text-indigo-500 transition-colors duration-200">
               <User />
             </span>
           </Link>
         )}
+        {/* Menu mobile */}
+        <div className="md:hidden">
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="text-gray-600 dark:text-gray-300 hover:text-indigo-500 focus:outline-none"
+            aria-label="Menu"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              {isMobileMenuOpen ? (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              ) : (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              )}
+            </svg>
+          </button>
+        </div>
       </div>
+      {/* Menu déroulant mobile */}
+      {isMobileMenuOpen && (
+        <div className="absolute top-16 left-0 w-full bg-white dark:bg-gray-800 shadow-md md:hidden">
+          <div className="flex flex-col space-y-2 p-4">
+            <Link href="/articles">
+              <span className="text-gray-600 dark:text-gray-300 hover:text-indigo-500 transition-colors duration-200">
+                Articles
+              </span>
+            </Link>
+            <Link href="/about">
+              <span className="text-gray-600 dark:text-gray-300 hover:text-indigo-500 transition-colors duration-200">
+                À propos
+              </span>
+            </Link>
+            <Link href="/contact">
+              <span className="text-gray-600 dark:text-gray-300 hover:text-indigo-500 transition-colors duration-200">
+                Contact
+              </span>
+            </Link>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }
