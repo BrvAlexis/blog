@@ -19,7 +19,6 @@ const ArticleCard = ({ article }: { article: DataType }) => {
             <Image
               src={article.image}
               alt={article.title}
-              fill
               className="object-cover group-hover:scale-105 transition-transform duration-300"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
@@ -120,7 +119,7 @@ export const ArticleList = () => {
     return (
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
+          <div role="status" aria-live="polite" className="text-center mb-16">
             <Skeleton className="h-6 w-32 mx-auto mb-4" />
             <Skeleton className="h-10 w-64 mx-auto mb-4" />
             <Skeleton className="h-4 w-96 mx-auto" />
@@ -164,12 +163,7 @@ export const ArticleList = () => {
             className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700"
           >
             Voir tous les articles
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
+            <svg className="w-4 h-4" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"

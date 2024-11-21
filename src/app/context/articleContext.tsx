@@ -28,7 +28,7 @@ interface FirebaseContextProps {
   deleteArticle: (id: string) => Promise<void>;
 }
 
-const FirebaseContext = createContext<FirebaseContextProps | undefined>(
+export const FirebaseContext = createContext<FirebaseContextProps | undefined>(
   undefined
 );
 
