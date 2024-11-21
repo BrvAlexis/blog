@@ -13,9 +13,9 @@ export const AboutSection = () => {
               <Image
                 src="/scientist-team.webp"
                 alt="Notre équipe de chercheurs"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
+                width={600}
+                height={400}
+                className="object-cover rounded-lg"
               />
             </div>
 

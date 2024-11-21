@@ -1,11 +1,11 @@
 import { render, screen } from "@testing-library/react";
 import { ArticleList } from "../article-list";
-import { collection, onSnapshot } from "firebase/firestore";
 import { FirebaseContext } from "@/app/context/articleContext";
+import { onSnapshot } from "firebase/firestore";
 
 // Mock Firebase
 jest.mock("@/firebase/configFirebase", () => ({
-  db: {},
+  firestore: {},
 }));
 
 jest.mock("firebase/firestore", () => ({
@@ -29,7 +29,6 @@ describe("ArticleList", () => {
     },
   ];
 
-  // Wrapper le composant avec le contexte
   const renderWithContext = (component: React.ReactNode) => {
     return render(
       <FirebaseContext.Provider
