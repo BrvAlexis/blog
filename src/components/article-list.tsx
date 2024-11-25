@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import Image from "next/image";
 import Link from "next/link";
+import { ErrorBoundary } from "@/components/error-boundary";
 
 const ArticleCard = ({ article }: { article: DataType }) => {
   return (
@@ -91,8 +92,12 @@ const ArticlesSkeleton = () => {
 export const ArticleList = () => {
   const [articles, setArticles] = useState<DataType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
 
-  useEffect(() => {
+  const fetchArticles = () => {
+    setIsLoading(true);
+    setError(null);
+
     const articlesQuery = query(
       collection(db, "articles"),
       orderBy("createdAt", "desc")
@@ -109,13 +114,22 @@ export const ArticleList = () => {
         setIsLoading(false);
       },
       (error) => {
-        console.error("Erreur lors de la récupération des articles:", error);
+        setError(error as Error);
         setIsLoading(false);
       }
     );
 
     return () => unsubscribe();
+  };
+
+  useEffect(() => {
+    const unsubscribe = fetchArticles();
+    return () => unsubscribe();
   }, []);
+
+  if (error) {
+    return <ErrorBoundary error={error} reset={fetchArticles} />;
+  }
 
   if (isLoading) {
     return (
