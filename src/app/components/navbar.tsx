@@ -34,7 +34,7 @@ export default function Navbar() {
       <div className="navbar-left flex items-center space-x-4">
         <Link href="/">
           <span className="text-xl font-semibold text-gray-800 dark:text-white hover:text-indigo-500 transition-colors duration-200">
-            HealthBlog
+            Secrets de Longévité
           </span>
         </Link>
         <div className="hidden md:flex space-x-4">
