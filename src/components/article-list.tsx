@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
 import { db } from "@/firebase/configFirebase";
 import { DataType } from "@/types/types";
@@ -11,9 +11,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { ErrorBoundary } from "@/components/error-boundary";
 
-const ArticleCard = ({ article }: { article: DataType }) => {
+const ArticleCard = memo(({ article }: { article: DataType }) => {
   return (
-    <Link href={`/article/${article.id}`} className="group">
+    <Link href={`/articles/${article.id}`} className="group">
       <Card className="h-full overflow-hidden hover:shadow-lg transition-all duration-300">
         {article.image && (
           <div className="relative h-48 overflow-hidden">
@@ -60,7 +60,9 @@ const ArticleCard = ({ article }: { article: DataType }) => {
       </Card>
     </Link>
   );
-};
+});
+
+ArticleCard.displayName = 'ArticleCard';
 
 const ArticlesSkeleton = () => {
   return (
@@ -95,9 +97,6 @@ export const ArticleList = () => {
   const [error, setError] = useState<Error | null>(null);
 
   const fetchArticles = () => {
-    setIsLoading(true);
-    setError(null);
-
     const articlesQuery = query(
       collection(db, "articles"),
       orderBy("createdAt", "desc")
@@ -106,20 +105,22 @@ export const ArticleList = () => {
     const unsubscribe = onSnapshot(
       articlesQuery,
       (snapshot) => {
-        const data: DataType[] = [];
-        snapshot.forEach((doc) => {
-          data.push({ ...doc.data(), id: doc.id } as DataType);
-        });
+        const data = snapshot.docs.map(doc => ({
+          ...doc.data(),
+          id: doc.id
+        })) as DataType[];
+        
         setArticles(data);
         setIsLoading(false);
       },
       (error) => {
+        console.error("Erreur lors du chargement des articles:", error);
         setError(error as Error);
         setIsLoading(false);
       }
     );
 
-    return () => unsubscribe();
+    return unsubscribe;
   };
 
   useEffect(() => {
