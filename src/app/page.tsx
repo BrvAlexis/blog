@@ -1,6 +1,7 @@
 "use client";
 
 import { Hero } from "@/components/hero";
+import { LongevityPrinciples } from "@/components/longevity-principles";
 import { ArticleList } from "@/components/article-list";
 import { AboutSection } from "@/components/about-section";
 import { ContactSection } from "@/components/contact-section";
@@ -12,6 +13,7 @@ export default function Home() {
     <>
       <main>
         <Hero />
+        <LongevityPrinciples />
         <Suspense fallback={<div>Chargement des articles...</div>}>
           <ArticleList />
         </Suspense>
