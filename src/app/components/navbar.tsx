@@ -42,32 +42,34 @@ export default function Navbar() {
   return (
     <div className={`
       sticky top-0 z-50 w-full flex justify-center
+      bg-gradient-to-br from-slate-50 to-slate-100
       ${!isScrolled ? 'pt-4' : 'pt-0'} transition-all duration-300
     `}>
       <nav className={`
-        navbar flex justify-between items-center p-4 bg-white/80 dark:bg-gray-800/80 
+        navbar flex justify-between items-center p-4 
+        bg-transparent dark:bg-gray-800/80 
         backdrop-blur-sm shadow-md transition-all duration-300
         ${isScrolled ? 'w-full' : 'w-2/3'}
       `}>
         <Link href="/">
-          <span className="text-xl font-semibold text-gray-800 dark:text-white hover:text-indigo-500 transition-colors duration-200">
+          <span className="text-3xl font-extrabold text-gray-800 dark:text-white hover:text-indigo-500 transition-colors duration-200">
             Secrets de Longévité
           </span>
         </Link>
         <div className="navbar-left flex flex-wrap items-center justify-between">
           <div className="hidden md:flex space-x-4">
             <Link href="/articles">
-              <span className="text-gray-600 dark:text-gray-300 hover:text-indigo-500 transition-colors duration-200">
+              <span className="text-gray-600 dark:text-gray-300 hover:text-indigo-500 transition-colors duration-200 text-xl font-bold">
                 Articles
               </span>
             </Link>
             <Link href="/about">
-              <span className="text-gray-600 dark:text-gray-300 hover:text-indigo-500 transition-colors duration-200">
+              <span className="text-gray-600 dark:text-gray-300 hover:text-indigo-500 transition-colors duration-200 text-xl font-bold">
                 À propos
               </span>
             </Link>
             <Link href="/contact">
-              <span className="text-gray-600 dark:text-gray-300 hover:text-indigo-500 transition-colors duration-200">
+              <span className="text-gray-600 dark:text-gray-300 hover:text-indigo-500 transition-colors duration-200 text-xl font-bold">
                 Contact
               </span>
             </Link>
@@ -150,12 +152,12 @@ export default function Navbar() {
       
       {isMobileMenuOpen && (
         <div className={`
-          absolute top-16 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-md md:hidden
+          absolute top-16 bg-transparent dark:bg-gray-800/80 backdrop-blur-sm shadow-md md:hidden
           ${isScrolled ? 'w-full' : 'w-2/3'}
         `}>
           <div className="flex flex-col space-y-2 p-4">
             <Link href="/articles">
-              <span className="text-gray-600 dark:text-gray-300 hover:text-indigo-500 transition-colors duration-200">
+              <span className="text-gray-600 dark:text-gray-300 hover:text-indigo-500 transition-colors duration-200 text-lg font-medium">
                 Articles
               </span>
             </Link>
