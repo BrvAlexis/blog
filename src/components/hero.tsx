@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
-
+import { motion } from "framer-motion";
 export const Hero = () => {
   return (
     <div className="relative min-h-[90vh] flex items-center bg-gradient-to-br from-slate-50 to-slate-100">
@@ -44,17 +44,62 @@ export const Hero = () => {
           {/* Logos de reconnaissance */}
           <div className="pt-8 border-t border-slate-200">
             <p className="text-sm text-slate-500 mb-4">Vu dans</p>
-            <div className="flex gap-6 items-center">
-              {["forbes", "techcrunch", "wired"].map((logo) => (
-                <Image
-                  key={logo}
-                  src={`/logos/${logo}.svg`}
-                  alt={logo}
-                  width={100}
-                  height={40}
-                  className="opacity-50 hover:opacity-70 transition-opacity"
-                />
-              ))}
+            <div className="relative flex gap-6 items-center overflow-hidden">
+              <motion.div
+                className="flex gap-6 items-center"
+                animate={{
+                  x: [0, -1920], // Ajuster selon la largeur totale des logos
+                }}
+                transition={{
+                  duration: 60,
+                  repeat: Infinity,
+                  ease: "linear",
+                }}
+              >
+                {[
+                  "forbes",
+                  "techcrunch", 
+                  "wired",
+                  "bloomberg",
+                  "reuters",
+                  "cnbc",
+                  "wsj",
+                  "nyt",
+                  "guardian",
+                  "economist"
+                ].map((logo) => (
+                  <Image
+                    key={logo}
+                    src="https://picsum.photos/seed/health-company/100/100"
+                    alt={logo}
+                    width={100}
+                    height={40}
+                    className="opacity-50 hover:opacity-70 transition-opacity"
+                  />
+                ))}
+                {/* Duplicate logos for seamless loop */}
+                {[
+                  "forbes",
+                  "techcrunch", 
+                  "wired",
+                  "bloomberg",
+                  "reuters",
+                  "cnbc",
+                  "wsj",
+                  "nyt", 
+                  "guardian",
+                  "economist"
+                ].map((logo) => (
+                  <Image
+                    key={`${logo}-duplicate`}
+                    src="https://picsum.photos/seed/health-company/100/100"
+                    alt={logo}
+                    width={100}
+                    height={40}
+                    className="opacity-50 hover:opacity-70 transition-opacity"
+                  />
+                ))}
+              </motion.div>
             </div>
           </div>
         </div>
@@ -62,10 +107,10 @@ export const Hero = () => {
         {/* Image principale */}
         <div className="relative hidden lg:block">
           <Image
-            src="/hero-health.webp"
+            src="https://picsum.photos/600/400"
             alt="Santé et longévité"
-            width={600}
-            height={600}
+            width={800}
+            height={400}
             className="rounded-2xl shadow-2xl"
             priority
           />

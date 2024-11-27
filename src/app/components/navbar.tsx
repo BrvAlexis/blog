@@ -73,6 +73,11 @@ export default function Navbar() {
                 Contact
               </span>
             </Link>
+            <Link href="/aliments">
+              <span className="text-gray-600 dark:text-gray-300 hover:text-indigo-500 transition-colors duration-200 text-xl font-bold">
+                Boite à outils
+              </span>
+            </Link>
           </div>
         </div>
         <div className="navbar-right flex items-center space-x-4">

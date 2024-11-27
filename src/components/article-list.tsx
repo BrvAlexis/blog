@@ -10,6 +10,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import Image from "next/image";
 import Link from "next/link";
 import { ErrorBoundary } from "@/components/error-boundary";
+import { ArticleGrid } from "@/components/article-grid";
 
 const ArticleCard = memo(({ article }: { article: DataType }) => {
   return (
@@ -95,6 +96,8 @@ export const ArticleList = () => {
   const [articles, setArticles] = useState<DataType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const articlesPerPage = 6; // Nombre d'articles par page
 
   const fetchArticles = () => {
     const articlesQuery = query(
@@ -128,69 +131,25 @@ export const ArticleList = () => {
     return () => unsubscribe();
   }, []);
 
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    // Logique pour récupérer les articles de la page spécifiée
+  };
+
   if (error) {
     return <ErrorBoundary error={error} reset={fetchArticles} />;
   }
 
   if (isLoading) {
-    return (
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div role="status" aria-live="polite" className="text-center mb-16">
-            <Skeleton className="h-6 w-32 mx-auto mb-4" />
-            <Skeleton className="h-10 w-64 mx-auto mb-4" />
-            <Skeleton className="h-4 w-96 mx-auto" />
-          </div>
-          <ArticlesSkeleton />
-        </div>
-      </section>
-    );
-  }
-
-  if (articles.length === 0) {
-    return (
-      <div className="text-center py-12">
-        <p className="text-muted-foreground">Aucun article disponible.</p>
-      </div>
-    );
+    return <ArticlesSkeleton />;
   }
 
   return (
-    <section className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <Badge className="mb-4">Nos Articles</Badge>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Découvrez Nos Articles
-          </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Explorez notre collection d'articles sur la santé et la longévité
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {articles.map((article) => (
-            <ArticleCard key={article.id} article={article} />
-          ))}
-        </div>
-
-        <div className="text-center mt-12">
-          <Link
-            href="/articles"
-            className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700"
-          >
-            Voir tous les articles
-            <svg className="w-4 h-4" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M17 8l4 4m0 0l-4 4m4-4H3"
-              />
-            </svg>
-          </Link>
-        </div>
-      </div>
-    </section>
+    <ArticleGrid
+      articles={articles}
+      totalPages={Math.ceil(articles.length / articlesPerPage)}
+      currentPage={currentPage}
+      onPageChange={handlePageChange}
+    />
   );
 };

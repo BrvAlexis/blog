@@ -13,7 +13,7 @@ export const AboutSection = () => {
           <div className="relative">
             <div className="relative h-[600px] rounded-2xl overflow-hidden">
               <Image
-                src="/scientist-team.webp"
+                src="https://picsum.photos/600/400"
                 alt="Notre équipe de chercheurs"
                 width={600}
                 height={400}
