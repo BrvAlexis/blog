@@ -40,3 +40,6 @@ yarn-error.log*
 next-env.d.ts
 
 .cursorrules
+.addArticles.js
+.articles.json
+.firebaseAdmin.js

@@ -1,0 +1,102 @@
+[
+    {
+      "id": "1",
+      "title": "Pomme",
+      "description": "Une pomme croquante et juteuse.",
+      "category": "Fruits",
+      "image": "https://example.com/images/pomme.jpg",
+      "authorId": "author1",
+      "authorName": "Jean Dupont",
+      "createdAt": "2023-10-01T12:00:00Z"
+    },
+    {
+      "id": "2",
+      "title": "Banane",
+      "description": "Une banane riche en potassium.",
+      "category": "Fruits",
+      "image": "https://example.com/images/banane.jpg",
+      "authorId": "author2",
+      "authorName": "Marie Curie",
+      "createdAt": "2023-10-02T12:00:00Z"
+    },
+    {
+      "id": "3",
+      "title": "Carotte",
+      "description": "Une carotte croquante, parfaite pour les salades.",
+      "category": "Légumes",
+      "image": "https://example.com/images/carotte.jpg",
+      "authorId": "author3",
+      "authorName": "Pierre Martin",
+      "createdAt": "2023-10-03T12:00:00Z"
+    },
+    {
+      "id": "4",
+      "title": "Tomate",
+      "description": "Une tomate juteuse et savoureuse.",
+      "category": "Légumes",
+      "image": "https://example.com/images/tomate.jpg",
+      "authorId": "author4",
+      "authorName": "Sophie Durand",
+      "createdAt": "2023-10-04T12:00:00Z"
+    },
+    {
+      "id": "5",
+      "title": "Brocoli",
+      "description": "Un brocoli riche en vitamines.",
+      "category": "Légumes",
+      "image": "https://example.com/images/brocoli.jpg",
+      "authorId": "author5",
+      "authorName": "Lucie Bernard",
+      "createdAt": "2023-10-05T12:00:00Z"
+    },
+    {
+      "id": "6",
+      "title": "Orange",
+      "description": "Une orange pleine de vitamine C.",
+      "category": "Fruits",
+      "image": "https://example.com/images/orange.jpg",
+      "authorId": "author6",
+      "authorName": "Marc Lefevre",
+      "createdAt": "2023-10-06T12:00:00Z"
+    },
+    {
+      "id": "7",
+      "title": "Fraise",
+      "description": "Une fraise sucrée et délicieuse.",
+      "category": "Fruits",
+      "image": "https://example.com/images/fraise.jpg",
+      "authorId": "author7",
+      "authorName": "Alice Moreau",
+      "createdAt": "2023-10-07T12:00:00Z"
+    },
+    {
+      "id": "8",
+      "title": "Épinard",
+      "description": "Des épinards frais et nutritifs.",
+      "category": "Légumes",
+      "image": "https://example.com/images/epinard.jpg",
+      "authorId": "author8",
+      "authorName": "Julien Petit",
+      "createdAt": "2023-10-08T12:00:00Z"
+    },
+    {
+      "id": "9",
+      "title": "Raisin",
+      "description": "Des raisins sucrés, parfaits pour le dessert.",
+      "category": "Fruits",
+      "image": "https://example.com/images/raisin.jpg",
+      "authorId": "author9",
+      "authorName": "Clara Simon",
+      "createdAt": "2023-10-09T12:00:00Z"
+    },
+    {
+      "id": "10",
+      "title": "Poivron",
+      "description": "Un poivron coloré et croquant.",
+      "category": "Légumes",
+      "image": "https://example.com/images/poivron.jpg",
+      "authorId": "author10",
+      "authorName": "Thomas Richard",
+      "createdAt": "2023-10-10T12:00:00Z"
+    }
+  ]

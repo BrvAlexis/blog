@@ -4,6 +4,7 @@ import { Hero } from "@/components/hero";
 import { LongevityPrinciples } from "@/components/longevity-principles";
 import { LongevityBenefits } from "@/components/longevity-benefits";
 import { ArticleList } from "@/components/article-list";
+import { EsperanceDeVie } from "@/components/esperance-de-vie";
 import { AboutSection } from "@/components/about-section";
 import { ContactSection } from "@/components/contact-section";
 import { Suspense } from "react";
@@ -20,7 +21,7 @@ export default function Home() {
         <Suspense fallback={<div>Chargement des articles...</div>}>
           <ArticleList />
         </Suspense>
-        
+        <EsperanceDeVie />
         <AboutSection />
         <ContactSection />
       </main>
