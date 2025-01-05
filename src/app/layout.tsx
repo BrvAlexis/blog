@@ -1,7 +1,7 @@
-import { ThemeProvider } from "@/app/components/theme-provider";
+import { ThemeProvider } from "@/app/_components/theme-provider";
 import type { Metadata } from "next";
 import "./globals.css";
-import Navbar from "@/app/components/navbar";
+import Navbar from "@/app/_components/navbar";
 import { FirebaseProvider } from "@/app/context/articleContext";
 
 import { Toaster } from "@/components/ui/toaster";

@@ -2,57 +2,69 @@
 
 import { memo } from "react";
 import { DataType } from "@/types/types";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import Link from "next/link";
 
 export const ArticleCard = memo(({ article }: { article: DataType }) => {
   return (
-    <Link href={`/articles/${article.id}`} className="group">
-      <Card className="h-full overflow-hidden hover:shadow-lg transition-all duration-300">
-        {article.image && (
-          <div className="relative h-48 overflow-hidden">
-            <Image
-              src={article.image}
-              alt={article.title}
-              className="object-cover group-hover:scale-105 transition-transform duration-300"
-              layout="fill"
-            />
-          </div>
-        )}
+    <article className="overflow-hidden rounded-lg border border-gray-100 bg-white shadow-sm">
+      {article.image && (
+        <div className="relative h-56 w-full">
+          <Image
+            src={article.image}
+            alt={article.title}
+            className="object-cover"
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
+        </div>
+      )}
 
-        <CardHeader>
-          <div className="flex items-center gap-2 text-sm text-gray-500 mb-2">
-            <Badge variant="secondary">{article.category}</Badge>
-            <time dateTime={article.createdAt}>
-              {new Date(article.createdAt).toLocaleDateString("fr-FR", {
-                day: "numeric",
-                month: "long",
-                year: "numeric",
-              })}
-            </time>
-          </div>
+      <div className="p-4 sm:p-6">
+        <div className="flex items-center gap-2 mb-4">
+          <Badge variant="secondary" className="text-sm">
+            {article.category}
+          </Badge>
+          <time dateTime={article.createdAt} className="text-sm text-gray-500">
+            {new Date(article.createdAt).toLocaleDateString("fr-FR", {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+            })}
+          </time>
+        </div>
 
-          <CardTitle className="group-hover:text-blue-600 transition-colors">
+        <Link href={`/articles/${article.id}`}>
+          <h3 className="text-lg font-medium text-gray-900 hover:text-blue-600 transition-colors">
             {article.title}
-          </CardTitle>
-        </CardHeader>
+          </h3>
+        </Link>
 
-        <CardContent>
-          <p className="text-gray-600 mb-4 line-clamp-2">
-            {article.description}
-          </p>
+        <p className="mt-2 line-clamp-3 text-sm/relaxed text-gray-500">
+          {article.description}
+        </p>
 
-          <div className="flex items-center justify-between">
-            <span className="text-sm text-gray-600">
-              Par {article.authorName}
+        <div className="mt-4 flex items-center justify-between">
+          <span className="text-sm text-gray-600">
+            Par {article.authorName}
+          </span>
+
+          <Link 
+            href={`/articles/${article.id}`}
+            className="group inline-flex items-center gap-1 text-sm font-medium text-blue-600"
+          >
+            Lire plus
+            <span 
+              aria-hidden="true" 
+              className="block transition-all group-hover:translate-x-0.5"
+            >
+              →
             </span>
-            <Badge variant="outline">Lire plus</Badge>
-          </div>
-        </CardContent>
-      </Card>
-    </Link>
+          </Link>
+        </div>
+      </div>
+    </article>
   );
 });
 

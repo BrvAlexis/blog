@@ -1,6 +1,6 @@
 "use client";
-import ProtectedRoutes from "../components/protectedroutes";
-import DashboardNav from "../components/DashboardNav";
+import ProtectedRoutes from "@/app/_components/protectedroutes";
+import DashboardNav from "@/app/_components/DashboardNav";
 
 export default function DashboardLayout({
   children,

@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { ModeToggle } from "@/app/components/toggle-dark-light";
+import { ModeToggle } from "@/app/_components/toggle-dark-light";
 import { useAuth } from "@/hooks/useAuth";
 import Link from "next/link";
 import { User } from "lucide-react";
