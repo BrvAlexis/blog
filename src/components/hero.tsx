@@ -4,14 +4,11 @@ import { Badge } from "@/components/ui/badge";
 
 export const Hero = () => {
   return (
-    <section className="bg-gray-50">
+    <section className="bg-gray-50 py-36">
       <div className="container-custom">
         <div className="mx-auto text-center">
-          <Badge className="inline-block mb-8">
-            +50,000 lecteurs satisfaits
-          </Badge>
-
-          <h1>
+          
+          <h1 className="text-6xl md:text-7xl lg:text-9xl font-bold mb-4 leading-[1.2]">
             Vivez plus longtemps
             <strong className="block text-blue-700">
               en pleine santé
@@ -24,9 +21,17 @@ export const Hero = () => {
           </p>
 
           <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Button className="bg-blue-600 hover:bg-blue-700">
-              Obtenir mon guide gratuit
-            </Button>
+            <form className="flex w-full max-w-md gap-2 flex-col sm:flex-row">
+              <input 
+                type="email"
+                placeholder="Votre email"
+                className="flex-1 rounded-lg border border-gray-300 px-3.5 py-2 text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-blue-600 focus:border-blue-600"
+                required
+              />
+              <Button type="submit" className="bg-blue-600 hover:bg-blue-700 whitespace-nowrap">
+                Obtenir mon guide
+              </Button>
+            </form>
 
             <Button variant="outline" className="text-blue-600 hover:bg-blue-50">
               Explorer les articles
