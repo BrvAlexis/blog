@@ -30,7 +30,7 @@ const ArticleCard = memo(({ article }: { article: DataType }) => {
         )}
 
         <CardHeader>
-          <div className="flex items-center gap-2 text-sm text-gray-500 mb-2">
+          <div className="flex items-center gap-2 mb-2">
             <Badge variant="secondary">{article.category}</Badge>
             <time dateTime={article.createdAt}>
               {new Date(article.createdAt).toLocaleDateString("fr-FR", {
@@ -52,7 +52,7 @@ const ArticleCard = memo(({ article }: { article: DataType }) => {
           </p>
 
           <div className="flex items-center justify-between">
-            <span className="text-sm text-gray-600">
+            <span className="text-gray-600">
               Par {article.authorName}
             </span>
             <Badge variant="outline">Lire plus</Badge>
@@ -97,7 +97,7 @@ export const ArticleList = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const articlesPerPage = 6; // Nombre d'articles par page
+  const articlesPerPage = 6;
 
   const fetchArticles = () => {
     const articlesQuery = query(
@@ -133,7 +133,6 @@ export const ArticleList = () => {
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
-    // Logique pour récupérer les articles de la page spécifiée
   };
 
   if (error) {

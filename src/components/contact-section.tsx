@@ -52,12 +52,12 @@ export const ContactSection = () => {
 
   return (
     <section className="bg-gray-50 py-16 sm:py-24">
-      <div className="container mx-auto px-4">
+      <div className="container-custom">
         {/* En-tête */}
         <div className="text-center space-y-4 mb-12">
           <Badge className="mb-4">Contact</Badge>
-          <h2 className="text-3xl sm:text-4xl font-bold">Contactez-nous</h2>
-          <p className="text-gray-600 max-w-[600px] mx-auto text-sm sm:text-base">
+          <h2>Contactez-nous</h2>
+          <p className="text-gray-600 max-w-[600px] mx-auto">
             Vous avez une question sur la santé et la longévité ? N'hésitez pas
             à nous contacter via le formulaire ci-dessous ou les réseaux
             sociaux.
@@ -68,7 +68,7 @@ export const ContactSection = () => {
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             {/* Formulaire */}
-            <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-sm">
+            <div className="bg-white p-8 rounded-2xl shadow-sm">
               <Form {...form}>
                 <form
                   onSubmit={form.handleSubmit(onSubmit)}
@@ -128,10 +128,10 @@ export const ContactSection = () => {
 
             {/* Informations de contact */}
             <div className="lg:pl-12">
-              <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-sm space-y-8">
+              <div className="bg-white p-8 rounded-2xl shadow-sm space-y-8">
                 {/* Réseaux sociaux */}
                 <div className="space-y-4">
-                  <h3 className="text-xl font-semibold">Suivez-nous</h3>
+                  <h3>Suivez-nous</h3>
                   <div className="flex gap-4">
                     {["twitter", "github", "linkedin"].map((social) => (
                       <Button
@@ -150,7 +150,7 @@ export const ContactSection = () => {
 
                 {/* Email */}
                 <div className="space-y-4">
-                  <h3 className="text-xl font-semibold">Email</h3>
+                  <h3>Email</h3>
                   <a
                     href="mailto:contact@votreblog.com"
                     className="text-gray-600 hover:text-blue-600 transition-colors block"
@@ -161,7 +161,7 @@ export const ContactSection = () => {
 
                 {/* Horaires */}
                 <div className="space-y-4">
-                  <h3 className="text-xl font-semibold">Horaires</h3>
+                  <h3>Horaires</h3>
                   <div className="space-y-2 text-gray-600">
                     <p>Lundi - Vendredi: 9h - 18h</p>
                     <p>Samedi - Dimanche: Fermé</p>

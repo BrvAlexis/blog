@@ -3,9 +3,15 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/app/_components/navbar";
 import { FirebaseProvider } from "@/app/context/articleContext";
-
 import { Toaster } from "@/components/ui/toaster";
 import { AuthProvider } from "@/app/context/authContext";
+import { Inter } from 'next/font/google';
+
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr" suppressHydrationWarning>
+    <html lang="fr" suppressHydrationWarning className={inter.variable}>
       <body suppressHydrationWarning>
         <AuthProvider>
           <FirebaseProvider>

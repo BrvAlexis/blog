@@ -3,25 +3,25 @@ import Link from "next/link";
 export const Footer = () => {
   return (
     <footer className="bg-white">
-      <div className="mx-auto max-w-screen-xl px-4 pb-8 pt-16 sm:px-6 lg:px-8">
+      <div className="container-custom pb-8 pt-16">
         <div className="mx-auto max-w-md">
-          <strong className="block text-center text-xl font-bold text-gray-900 sm:text-3xl">
+          <h2 className="text-center">
             Recevez nos dernières découvertes en santé
-          </strong>
+          </h2>
 
           <form className="mt-6">
             <div className="relative max-w-lg">
               <label className="sr-only" htmlFor="email">Email</label>
 
               <input
-                className="w-full rounded-full border-gray-200 bg-gray-100 p-4 pe-32 text-sm font-medium"
+                className="w-full rounded-full border-gray-200 bg-gray-100 p-4 pe-32"
                 id="email"
                 type="email"
                 placeholder="votre@email.com"
               />
 
               <button
-                className="absolute end-1 top-1/2 -translate-y-1/2 rounded-full bg-blue-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-blue-700"
+                className="absolute end-1 top-1/2 -translate-y-1/2 rounded-full bg-blue-600 px-5 py-3 text-white transition hover:bg-blue-700"
               >
                 S&apos;inscrire
               </button>
@@ -31,7 +31,7 @@ export const Footer = () => {
 
         <div className="mt-16 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-32">
           <div className="mx-auto max-w-sm lg:max-w-none">
-            <p className="mt-4 text-center text-gray-500 lg:text-left lg:text-lg">
+            <p className="mt-4 text-center text-gray-500 lg:text-left">
               Découvrez les dernières avancées scientifiques et conseils pratiques pour optimiser votre santé et votre longévité. Rejoignez notre communauté de plus de 50 000 lecteurs passionnés.
             </p>
 
@@ -86,7 +86,7 @@ export const Footer = () => {
 
           <div className="grid grid-cols-1 gap-8 text-center lg:grid-cols-3 lg:text-left">
             <div>
-              <strong className="font-medium text-gray-900">Ressources</strong>
+              <h3>Ressources</h3>
 
               <ul className="mt-6 space-y-1">
                 <li>
@@ -108,7 +108,7 @@ export const Footer = () => {
             </div>
 
             <div>
-              <strong className="font-medium text-gray-900">À Propos</strong>
+              <h3>À Propos</h3>
 
               <ul className="mt-6 space-y-1">
                 <li>
@@ -130,7 +130,7 @@ export const Footer = () => {
             </div>
 
             <div>
-              <strong className="font-medium text-gray-900">Support</strong>
+              <h3>Support</h3>
 
               <ul className="mt-6 space-y-1">
                 <li>
@@ -154,7 +154,7 @@ export const Footer = () => {
         </div>
 
         <div className="mt-16 border-t border-gray-100 pt-8">
-          <p className="text-center text-xs/relaxed text-gray-500">
+          <p className="text-center text-gray-500">
             © 2024 Blog Santé & Longévité. Tous droits réservés.
             <br />
             Créé avec passion pour votre santé et votre longévité.

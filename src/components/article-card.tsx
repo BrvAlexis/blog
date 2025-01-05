@@ -10,7 +10,7 @@ export const ArticleCard = memo(({ article }: { article: DataType }) => {
   return (
     <article className="overflow-hidden rounded-lg border border-gray-100 bg-white shadow-sm">
       {article.image && (
-        <div className="relative h-56 w-full">
+        <div className="relative h-72 w-full">
           <Image
             src={article.image}
             alt={article.title}
@@ -21,12 +21,12 @@ export const ArticleCard = memo(({ article }: { article: DataType }) => {
         </div>
       )}
 
-      <div className="p-4 sm:p-6">
-        <div className="flex items-center gap-2 mb-4">
-          <Badge variant="secondary" className="text-sm">
+      <div className="p-6">
+        <div className="flex items-center gap-4 mb-4">
+          <Badge variant="secondary">
             {article.category}
           </Badge>
-          <time dateTime={article.createdAt} className="text-sm text-gray-500">
+          <time dateTime={article.createdAt}>
             {new Date(article.createdAt).toLocaleDateString("fr-FR", {
               day: "numeric",
               month: "long",
@@ -36,23 +36,23 @@ export const ArticleCard = memo(({ article }: { article: DataType }) => {
         </div>
 
         <Link href={`/articles/${article.id}`}>
-          <h3 className="text-lg font-medium text-gray-900 hover:text-blue-600 transition-colors">
+          <h3 className="hover:text-blue-600 transition-colors">
             {article.title}
           </h3>
         </Link>
 
-        <p className="mt-2 line-clamp-3 text-sm/relaxed text-gray-500">
+        <p className="mt-4 line-clamp-3">
           {article.description}
         </p>
 
-        <div className="mt-4 flex items-center justify-between">
-          <span className="text-sm text-gray-600">
+        <div className="mt-6 flex items-center justify-between">
+          <span>
             Par {article.authorName}
           </span>
 
           <Link 
             href={`/articles/${article.id}`}
-            className="group inline-flex items-center gap-1 text-sm font-medium text-blue-600"
+            className="group inline-flex items-center gap-2 text-blue-600"
           >
             Lire plus
             <span 
