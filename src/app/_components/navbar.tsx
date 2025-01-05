@@ -52,7 +52,7 @@ export default function Navbar() {
         ${isScrolled ? 'w-full' : 'w-2/3'}
       `}>
         <Link href="/">
-          <span className="text-3xl font-extrabold text-gray-800 dark:text-white hover:text-indigo-500 transition-colors duration-200">
+          <span className="text-3xl md:text-4xl text-gray-800 dark:text-white hover:text-indigo-500 transition-colors duration-200" style={{ fontFamily: 'var(--font-logo)' }}>
             Secrets de Longévité
           </span>
         </Link>
